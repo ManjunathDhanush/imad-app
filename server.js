@@ -5,9 +5,9 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-
-var article1={
-    title:"Article-1 Manjunath",
+var articles={
+    'article-1':{
+    title :"Article-1 Manjunath",
     heading:"article-1",
     date:"feb 15 2018",
     content:` <p>
@@ -19,7 +19,36 @@ var article1={
             <p>
                 this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
             </p>`
-}
+        },
+     'article-2':{
+        title:"Article-2 Manjunath",
+        heading:"article-2",
+        date:"feb 16 2018",
+        content:` <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>
+                <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>
+                <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>`
+    },
+     'article-3':{
+        title:"Article-3 Manjunath",
+        heading:"article-3",
+        date:"feb 17 2018",
+        content:` <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>
+                <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>
+                <p>
+                    this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.this is the paragraph for my first article.
+                </p>`
+    }
+};
 function createtemplate(data){
         var title =data.title;
         var date = data.date;
@@ -60,17 +89,11 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-1', function (req, res) {
-  res.send(createtemplate(article1));
+app.get('/:articlename', function (req, res) {
+    var articlename=req.params.articlename;
+  res.send(createtemplate(articles[articlename]));
 });
 
-app.get('/article-2', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'article-2.html'));
-});
-
-app.get('/article-3', function (req, res) {
- res.sendFile(path.join(__dirname, 'ui', 'article3.html'));
-});
 
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
