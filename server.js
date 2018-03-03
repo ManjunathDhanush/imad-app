@@ -126,8 +126,6 @@ app.get('/articles/:articlename', function (req, res) {
            }
        }
     });
-    
-  
 });
 
 app.get('/:articlename', function (req, res) {
